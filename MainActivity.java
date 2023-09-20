@@ -4,29 +4,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button login;
+    private EditText usernameEditText, passwordEditText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        usernameEditText = findViewById(R.id.usernameEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+
+    }
+
     public void LogIn(View view){
-        EditText username=(EditText) findViewById(R.id.UsernameEditText);
-        EditText password=(EditText) findViewById(R.id.PasswordEditText);
+        String username = usernameEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
 
 
-        if(username.getText().toString().equals("123") && password.getText().toString().equals("123")){
-            login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        if(username.equals("123") && password.equals("123")){
+
                     Intent intent=new Intent(MainActivity.this, SecondMainActivity.class);
                     startActivity(intent);
                     finish();
-                }
-            });
         }
         else {
             CharSequence text = "username or password is wrong";
@@ -35,24 +40,6 @@ public class MainActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(this , text, duration);
             toast.show();
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        login=(Button) findViewById(R.id.LoginButton);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, SecondMainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-
     }
 
 }
